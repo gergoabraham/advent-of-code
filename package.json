@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha **/*.test.js --watch",
     "lint": "eslint src/**",
-    "start": "node ./src/run.js"
+    "start": "node ./src/run.js",
+    "start2": "node ./src/run2.js"
   },
   "author": "",
   "license": "ISC",
