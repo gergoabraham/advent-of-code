@@ -1,4 +1,4 @@
-const countIncreases = require('./1');
+const countIncreases = require('./1a');
 
 module.exports = (input) => {
   const averages = generateSlidingWindowAverages(input);

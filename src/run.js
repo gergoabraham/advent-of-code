@@ -1,13 +1,20 @@
-const run = (fileName) => {
+const run = (puzzleName) => {
+  const fileName = `${puzzleName}.js`;
+  const inputFileName = `${puzzleName.replace(/[ab]/, '')}.input.js`;
+
   let solver, input;
 
   try {
-    solver = require(`./${fileName}.js`);
-
-    const inputFileNumber = fileName - 1 + (fileName % 2);
-    input = require(`./${inputFileNumber}.input.js`);
+    solver = require('./' + fileName);
   } catch (e) {
-    console.error(e);
+    console.error(`\n⚠ ${fileName} not found!\n`);
+    return;
+  }
+
+  try {
+    input = require('./' + inputFileName);
+  } catch (e) {
+    console.error(`\n⚠ ${inputFileName} not found!\n`);
     return;
   }
 
@@ -19,10 +26,18 @@ Result:
   );
 };
 
-const puzzleNumber = Number(process.argv[2]);
+const puzzleName = process.argv[2];
+const validPuzzleNames = new Array(50)
+  .fill(null)
+  .map((_, i) => `${Math.floor(i / 2) + 1}${i % 2 ? 'b' : 'a'}`);
 
-if (!puzzleNumber || puzzleNumber < 1 || puzzleNumber > 50) {
-  console.error('\n❤ Please give the number of the puzzle:\n`yarn start [number]`\n');
+if (!validPuzzleNames.includes(puzzleName)) {
+  console.error(
+    `
+❤ Please give the name of the puzzle:
+   e.g. 'yarn start 2a' or 'yarn start 5b'
+`
+  );
 } else {
-  run(puzzleNumber);
+  run(puzzleName);
 }

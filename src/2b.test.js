@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
-const solver = require('./4');
+const solver = require('./2b');
 
-describe('4', () => {
+describe('2b', () => {
   const input = [
     'down 6', // aim: 6
     'forward 2', // pos: 2, depth: 6*2 = 12

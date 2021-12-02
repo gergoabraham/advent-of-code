@@ -1,8 +1,8 @@
 const { expect } = require('chai');
-const countIncreasesWithSlidingWindow = require('./2');
+const countIncreasesWithSlidingWindow = require('./1b');
 const { generateSlidingWindowAverages } = countIncreasesWithSlidingWindow;
 
-context('2', () => {
+context('1b', () => {
   const input = [2, 5, 4, 1, 0, 6, 7, 1, 4];
 
   it('generateSlidingWindowAverages', () => {
