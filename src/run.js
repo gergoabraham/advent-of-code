@@ -1,14 +1,22 @@
 const run = (fileName) => {
-  let run;
+  let solver, input;
 
   try {
-    run = require(`./${fileName}.js`).run;
+    solver = require(`./${fileName}.js`);
+
+    const inputFileNumber = fileName - 1 + (fileName % 2);
+    input = require(`./${inputFileNumber}.input.js`);
   } catch (e) {
-    console.error(`\n⚠ Couldn't find the file '${fileName}'!\n`);
+    console.error(e);
     return;
   }
 
-  run();
+  console.log(
+    `
+Result:
+   ${solver(input)}
+`
+  );
 };
 
 const puzzleNumber = Number(process.argv[2]);

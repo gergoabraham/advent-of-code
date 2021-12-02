@@ -1,5 +1,6 @@
 const { expect } = require('chai');
-const { countIncreasesWithSlidingWindow, generateSlidingWindowAverages } = require('./2');
+const countIncreasesWithSlidingWindow = require('./2');
+const { generateSlidingWindowAverages } = countIncreasesWithSlidingWindow;
 
 context('2', () => {
   const input = [2, 5, 4, 1, 0, 6, 7, 1, 4];

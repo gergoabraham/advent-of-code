@@ -1,4 +1,4 @@
-const { countIncreases } = require('./1');
+const countIncreases = require('./1');
 const { expect } = require('chai');
 
 context('1', () => {
