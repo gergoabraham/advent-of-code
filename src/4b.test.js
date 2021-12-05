@@ -23,10 +23,10 @@ const input =
 22 11 13  6  5
  2  0 12  3  7`.split(/\n/);
 
-it.only('4b', () => {
+it('4b', () => {
   expect(solver(input)).to.equal(1924);
 });
 
-it.only('4b - with real data', () => {
+it('4b - with real data', () => {
   expect(solver(realInput)).to.equal(8224);
 });

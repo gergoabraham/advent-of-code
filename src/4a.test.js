@@ -22,6 +22,6 @@ const input =
 22 11 13  6  5
  2  0 12  3  7`.split(/\n/);
 
-it.only('4a', () => {
+it('4a', () => {
   expect(solver(input)).to.equal(4512);
 });
