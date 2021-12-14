@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha **/*.test.js --watch",
+    "testDay": "mocha **/*.test.js --watch --grep",
     "lint": "eslint src/**",
     "start": "node ./src/run.js"
   },
