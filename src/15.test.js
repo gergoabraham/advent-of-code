@@ -22,4 +22,11 @@ it('15b', () => {
 });
 
 // The result for B:
+
+// before using 'consideredSet', the next currentNode was
+// searched in all unvisited nodes:
 // Dijkstra algorithm finished in: 6:52.767 (m:ss.mmm)
+
+// consideredSet contains all nodes that are unvisited and have smaller than
+// infinite tentative distances:
+// Dijkstra algorithm finished in: 2.747s

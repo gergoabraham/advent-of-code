@@ -1,5 +1,6 @@
 module.exports = (input = '', silent = false) => {
   const unvisitedSet = new Set();
+  const consideredSet = new Set();
 
   const arrayOfNodes = input.split('\n').map((line, y) =>
     line.split('').map((num, x) => {
@@ -29,6 +30,7 @@ module.exports = (input = '', silent = false) => {
 
   // initial condition
   arrayOfNodes[0][0].distance = 0;
+  consideredSet.add(arrayOfNodes[0][0]);
 
   const total = unvisitedSet.size;
   initProgressBar();
@@ -36,7 +38,7 @@ module.exports = (input = '', silent = false) => {
   while (unvisitedSet.has(targetNode)) {
     // find minimum distance
     let currentNode = { distance: Infinity };
-    unvisitedSet.forEach((node) => {
+    consideredSet.forEach((node) => {
       if (node.distance < currentNode.distance) {
         currentNode = node;
       }
@@ -52,9 +54,11 @@ module.exports = (input = '', silent = false) => {
         node.distance,
         currentNode.distance + node.weight
       );
+      consideredSet.add(node);
     });
 
     unvisitedSet.delete(currentNode);
+    consideredSet.delete(currentNode);
 
     !silent && displayProgressBar(total - unvisitedSet.size, total);
   }
