@@ -1,10 +1,10 @@
-module.exports = (input = '') => {
+module.exports = (input = '', returnPackage = false) => {
   const binaryInput = [...input]
     .map((char) => [...parseInt(char, 16).toString(2).padStart(4, 0)])
     .flat();
   const package = decodePackage(binaryInput);
 
-  return sumVersions(package);
+  return returnPackage ? package : sumVersions(package);
 };
 
 const LITERAL_ID = 4;

@@ -1,8 +1,6 @@
 const expect = require('chai').expect;
 const solverA = require('./16a');
-// const solverB = require('./16b');
-
-const input = ``;
+const solverB = require('./16b');
 
 describe('16a', () => {
   it('literal', () => {
@@ -34,6 +32,40 @@ describe('16a', () => {
   });
 });
 
-// it('16b', () => {
-//   expect(solverB(input, true)).to.equal(315);
-// });
+describe('16b', () => {
+  it('literal', () => {
+    expect(solverB('D2FE28')).to.equal(2021);
+  });
+
+  it('sum', () => {
+    expect(solverB('C200B40A82')).to.equal(3);
+  });
+
+  it('product', () => {
+    expect(solverB('04005AC33890')).to.equal(54);
+  });
+
+  it('minimum', () => {
+    expect(solverB('880086C3E88112')).to.equal(7);
+  });
+
+  it('maximum', () => {
+    expect(solverB('CE00C43D881120')).to.equal(9);
+  });
+
+  it('greater than', () => {
+    expect(solverB('F600BC2D8F')).to.equal(0);
+  });
+
+  it('less than', () => {
+    expect(solverB('D8005AC2A8F0')).to.equal(1);
+  });
+
+  it('equal', () => {
+    expect(solverB('9C005AC2F8F0')).to.equal(0);
+  });
+
+  it('one plus example', () => {
+    expect(solverB('9C0141080250320F1802104A08')).to.equal(1);
+  });
+});
