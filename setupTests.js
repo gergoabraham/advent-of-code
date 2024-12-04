@@ -1,2 +1,1 @@
-const chai = require("chai");
-chai.should();
+import("chai").then((chai) => chai.should());
