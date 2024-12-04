@@ -1,6 +1,5 @@
 import fs from "fs";
 import promptSetup from "prompt-sync";
-// @ts-ignore
 import clipboard from "clipboardy";
 
 const prompt = promptSetup();
