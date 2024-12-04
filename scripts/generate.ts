@@ -1,23 +1,25 @@
-const fs = require("fs");
-const prompt = require("prompt-sync")();
+import fs from "fs";
+import promptSetup from "prompt-sync";
+// @ts-ignore
+import clipboard from "clipboardy";
+
+const prompt = promptSetup();
 
 const doStuff = async () => {
-  const clipboard = (await import("clipboardy")).default;
-
   console.log(`\n🎄🎄🎄 Advent of Code generator - 2022 🎄🎄🎄\n`);
 
-  const defaultDay = new Date().getDate();
+  const defaultDay = new Date().getDate().toString();
   const day = prompt(`🗓  Which day is it for? (${defaultDay}) `, defaultDay);
+
   validateNumber(day, "Day");
 
   const fileNames = {
-    input: `./src/${day}/${day}.input.js`,
-    task1: `./src/${day}/${day}i.js`,
-    test1: `./src/${day}/${day}i.test.js`,
-    task2: `./src/${day}/${day}ii.js`,
-    test2: `./src/${day}/${day}ii.test.js`,
+    input: `./src/${day}/${day}.input.ts`,
+    task1: `./src/${day}/${day}i.ts`,
+    test1: `./src/${day}/${day}i.test.ts`,
+    task2: `./src/${day}/${day}ii.ts`,
+    test2: `./src/${day}/${day}ii.test.ts`,
   };
-
   checkForExistingFiles(fileNames);
 
   console.log(
@@ -42,7 +44,7 @@ const doStuff = async () => {
   validateIntention(day, exampleInput, exampleOutput, input);
 
   const test1 = generateTestFileContent(day, "i", exampleInput, exampleOutput);
-  const test2 = generateTestFileContent(day, "ii", exampleInput, "0");
+  const test2 = generateTestFileContent(day, "ii", exampleInput, 0);
 
   try {
     fs.mkdirSync(`./src/${day}`);
@@ -57,16 +59,20 @@ const doStuff = async () => {
   }
 };
 
-const CODE_FILE = `/**
-* @param {string} input
-*/
-module.exports = (input) => {
+const CODE_FILE = `const solver = (input: string): string | number => {
   return input;
 };
+
+export default solver;
 `;
 
-const generateTestFileContent = (day, task, exampleInput, exampleOutput) =>
-  `const solver = require("./${day}${task}");
+const generateTestFileContent = (
+  day: string,
+  task: string,
+  exampleInput: string,
+  exampleOutput: number
+) =>
+  `import solver from "./${day}${task}";
 
 const input = \`${exampleInput}\`;
 
@@ -75,10 +81,12 @@ it("${day}${task}", () => {
 });
 `;
 
-const generateInputFileContent = (input) => `module.exports = \`${input}\`;
+const generateInputFileContent = (input: string) => `const input = \`${input}\`;
+
+export default input;
 `;
 
-const checkForExistingFiles = (fileNames) => {
+const checkForExistingFiles = (fileNames: { [key in string]: string }) => {
   const existingFiles = [];
 
   for (const file in fileNames) {
@@ -110,7 +118,12 @@ const checkForExistingFiles = (fileNames) => {
   }
 };
 
-const validateIntention = (day, exampleInput, exampleOutput, input) => {
+const validateIntention = (
+  day: string,
+  exampleInput: string,
+  exampleOutput: number,
+  input: string
+) => {
   console.log("\nYou added the following inputs:");
   console.log(`   - Day:            ${day}`);
   console.log(`   - Example input:  ${getFirstLine(exampleInput)}`);
@@ -127,11 +140,11 @@ const validateIntention = (day, exampleInput, exampleOutput, input) => {
   }
 };
 
-const getFirstLine = (s) =>
+const getFirstLine = (s: string) =>
   s.includes("\n") ? s.substring(0, s.indexOf("\n")) + "..." : s;
 
-function validateNumber(userInput, subject) {
-  if (userInput === "" || isNaN(userInput)) {
+function validateNumber(userInput: string, subject: string) {
+  if (userInput === "" || isNaN(+userInput)) {
     console.log(`\n❌ ${subject} should be a number! ❌\n`);
     process.exit();
   }

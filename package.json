@@ -3,18 +3,32 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "type": "module",
   "devDependencies": {
+    "@types/chai": "^5.0.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.10.1",
+    "@types/prompt-sync": "^4.2.3",
     "chai": "^5.1.2",
     "clipboardy": "^4.0.0",
     "eslint": "^9.16.0",
     "mocha": "^11.0.1",
     "prettier": "^3.4.2",
-    "prompt-sync": "^4.2.0"
+    "prompt-sync": "^4.2.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
   },
   "scripts": {
-    "test": "mocha src/** --watch --require setupTests.js",
-    "testday": "node --stack-size=8000 node_modules/mocha/bin/_mocha src/** --watch --require setupTests.js --grep",
-    "solve": "node --stack-size=8000 scripts/solve.js",
-    "generate": "node scripts/generate.js"
+    "testday": "tsx --stack-size=8000 node_modules/mocha/bin/_mocha --grep",
+    "solve": "tsx --stack-size=8000 scripts/solve.ts",
+    "generate": "tsx scripts/generate.ts"
+  },
+  "mocha": {
+    "extension": [
+      "ts"
+    ],
+    "spec": "src/**/*.ts",
+    "require": "setupTests.js",
+    "watch": true
   }
 }
