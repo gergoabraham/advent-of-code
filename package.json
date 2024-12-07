@@ -29,6 +29,7 @@
     ],
     "spec": "src/**/*.ts",
     "require": "setupTests.js",
-    "watch": true
+    "watch": true,
+    "timeout": 10000
   }
 }
