@@ -1,0 +1,16 @@
+import solver from "./12i";
+
+const input = `RRRRIICCFF
+RRRRIICCCF
+VVRRRCCFFF
+VVRCCCJFFF
+VVVVCJJCFE
+VVIVCCJJEE
+VVIIICJJEE
+MIIIIIJJEE
+MIIISIJEEE
+MMMISSJEEE`;
+
+it("12i", () => {
+  solver(input).should.equal(1930);
+});
