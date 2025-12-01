@@ -1,4 +1,4 @@
 node_modules
 
 # do not commit puzzle inputs
-src/**/*.input.ts
+**/*.input.ts

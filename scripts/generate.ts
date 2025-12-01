@@ -1,59 +1,61 @@
-import fs from "fs";
-import promptSetup from "prompt-sync";
-import clipboard from "clipboardy";
+import fs from 'fs';
+import promptSetup from 'prompt-sync';
+import clipboard from 'clipboardy';
 
 const prompt = promptSetup();
 
+const EVENT = '2025';
+
 const doStuff = async () => {
-  console.log(`\n🎄🎄🎄 Advent of Code generator - 2022 🎄🎄🎄\n`);
+  console.log(`\n🎄🎄🎄 Advent of Code generator - 2025 🎄🎄🎄\n`);
 
   const defaultDay = new Date().getDate().toString();
   const day = prompt(`🗓  Which day is it for? (${defaultDay}) `, defaultDay);
 
-  validateNumber(day, "Day");
+  validateNumber(day, 'Day');
 
   const fileNames = {
-    input: `./src/${day}/${day}.input.ts`,
-    task1: `./src/${day}/${day}i.ts`,
-    test1: `./src/${day}/${day}i.test.ts`,
-    task2: `./src/${day}/${day}ii.ts`,
-    test2: `./src/${day}/${day}ii.test.ts`,
+    input: `./events/${EVENT}/${day}/${day}.input.ts`,
+    task1: `./events/${EVENT}/${day}/${day}i.ts`,
+    test1: `./events/${EVENT}/${day}/${day}i.test.ts`,
+    task2: `./events/${EVENT}/${day}/${day}ii.ts`,
+    test2: `./events/${EVENT}/${day}/${day}ii.test.ts`,
   };
   checkForExistingFiles(fileNames);
 
   console.log(
-    "\n📋 Copy the following to the clipboard and then press [Enter]:"
+    '\n📋 Copy the following to the clipboard and then press [Enter]:'
   );
-  prompt("👉 Example input...");
+  prompt('👉 Example input...');
   const exampleInput = clipboard
     .readSync()
-    .replace(/[`$\\]/g, (c) => "\\" + c)
+    .replace(/[`$\\]/g, (c) => '\\' + c)
     .trimEnd();
 
-  prompt("👉 Example output...");
+  prompt('👉 Example output...');
   const exampleOutputString = clipboard.readSync();
-  const exampleOutput = validateNumber(exampleOutputString, "Example output");
+  const exampleOutput = validateNumber(exampleOutputString, 'Example output');
 
-  prompt("👉 Riddle input...");
+  prompt('👉 Riddle input...');
   const input = clipboard
     .readSync()
-    .replace(/[`$\\]/g, (c) => "\\" + c)
+    .replace(/[`$\\]/g, (c) => '\\' + c)
     .trimEnd();
 
   validateIntention(day, exampleInput, exampleOutput, input);
 
-  const test1 = generateTestFileContent(day, "i", exampleInput, exampleOutput);
-  const test2 = generateTestFileContent(day, "ii", exampleInput, 0);
+  const test1 = generateTestFileContent(day, 'i', exampleInput, exampleOutput);
+  const test2 = generateTestFileContent(day, 'ii', exampleInput, 0);
 
   try {
-    fs.mkdirSync(`./src/${day}`);
+    fs.mkdirSync(`./events/${EVENT}/${day}`);
     fs.writeFileSync(fileNames.input, generateInputFileContent(input), {});
     fs.writeFileSync(fileNames.task1, CODE_FILE);
     fs.writeFileSync(fileNames.task2, CODE_FILE);
     fs.writeFileSync(fileNames.test1, test1);
     fs.writeFileSync(fileNames.test2, test2);
   } catch (e) {
-    console.log("😿 Something went wrong...");
+    console.log('😿 Something went wrong...');
     console.log(e);
   }
 };
@@ -101,17 +103,17 @@ const checkForExistingFiles = (fileNames: { [key in string]: string }) => {
   if (existingFiles.length > 0) {
     console.log(
       existingFiles.length > 1
-        ? "\n❗️ The following files already exist:"
-        : "\n❗️ The following file already exists:"
+        ? '\n❗️ The following files already exist:'
+        : '\n❗️ The following file already exists:'
     );
     existingFiles.forEach((filename) => console.log(`   - ${filename}`));
-    console.log("");
+    console.log('');
 
-    const answer = prompt("Enter [y] if you want to overwrite these files: ");
-    if (answer === "y") {
-      console.log("Continuing... 💚");
+    const answer = prompt('Enter [y] if you want to overwrite these files: ');
+    if (answer === 'y') {
+      console.log('Continuing... 💚');
     } else {
-      console.log("\nGoodbye then 👋\n");
+      console.log('\nGoodbye then 👋\n');
       process.exit();
     }
   }
@@ -123,27 +125,27 @@ const validateIntention = (
   exampleOutput: number,
   input: string
 ) => {
-  console.log("\nYou added the following inputs:");
+  console.log('\nYou added the following inputs:');
   console.log(`   - Day:            ${day}`);
   console.log(`   - Example input:  ${getFirstLine(exampleInput)}`);
   console.log(`   - Example output: ${exampleOutput}`);
   console.log(`   - Riddle input:   ${getFirstLine(input)}`);
-  console.log("");
+  console.log('');
 
-  const answer = prompt("🎄 Ready to generate? [Enter]/Anything else: ");
-  if (answer === "") {
-    console.log("Generating... 💚\n");
+  const answer = prompt('🎄 Ready to generate? [Enter]/Anything else: ');
+  if (answer === '') {
+    console.log('Generating... 💚\n');
   } else {
-    console.log("\nGoodbye then 👋\n");
+    console.log('\nGoodbye then 👋\n');
     process.exit();
   }
 };
 
 const getFirstLine = (s: string) =>
-  s.includes("\n") ? s.substring(0, s.indexOf("\n")) + "..." : s;
+  s.includes('\n') ? s.substring(0, s.indexOf('\n')) + '...' : s;
 
 function validateNumber(userInput: string, subject: string) {
-  if (userInput === "" || isNaN(+userInput)) {
+  if (userInput === '' || isNaN(+userInput)) {
     console.log(`\n❌ ${subject} should be a number! ❌\n`);
     process.exit();
   }

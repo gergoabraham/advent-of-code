@@ -27,7 +27,7 @@
     "extension": [
       "ts"
     ],
-    "spec": "events/**/*.?s",
+    "spec": "events/2025/**/*.?s",
     "require": "setupTests.js",
     "watch": true,
     "timeout": 10000
