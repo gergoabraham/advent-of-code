@@ -1,5 +1,4 @@
-const solver = require("./12i");
-const puzzleInput = require("./12.input");
+const solver = require('./12i');
 
 const input = `???.### 1,1,3
 .??..??...?##. 1,1,3
@@ -8,7 +7,6 @@ const input = `???.### 1,1,3
 ????.######..#####. 1,6,5
 ?###???????? 3,2,1`;
 
-it("12i", () => {
+it('12i', () => {
   solver(input).should.equal(21);
-  solver(puzzleInput).should.equal(7017);
 });

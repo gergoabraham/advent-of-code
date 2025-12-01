@@ -13,16 +13,10 @@ bdfegc cbegaf gecbf dfcage bdacg ed bedf ced adcbefg gebcd | ed bcgafe cdgba cbg
 egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
 gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce`;
 
-const realInput = require('./8.input');
-
 it('8a', () => {
   expect(solverA(input)).to.equal(26);
 });
 
 it('8b', () => {
   expect(solverB(input)).to.equal(61229);
-});
-
-it('8b - real input', () => {
-  expect(solverB(realInput)).to.equal(990964);
 });

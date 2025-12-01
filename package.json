@@ -1,5 +1,5 @@
 {
-  "name": "advent-of-code-2024",
+  "name": "advent-of-code",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "extension": [
       "ts"
     ],
-    "spec": "src/**/*.ts",
+    "spec": "events/**/*.?s",
     "require": "setupTests.js",
     "watch": true,
     "timeout": 10000

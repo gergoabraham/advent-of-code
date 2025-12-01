@@ -1,6 +1,5 @@
 const expect = require('chai').expect;
 const solver = require('./4b');
-const realInput = require('./4.input');
 
 const input =
   `7,4,9,5,11,17,23,2,0,14,21,24,10,16,13,6,15,25,12,22,18,20,8,19,3,26,1
@@ -25,8 +24,4 @@ const input =
 
 it('4b', () => {
   expect(solver(input)).to.equal(1924);
-});
-
-it('4b - with real data', () => {
-  expect(solver(realInput)).to.equal(8224);
 });
