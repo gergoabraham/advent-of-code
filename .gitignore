@@ -2,3 +2,5 @@ node_modules
 
 # do not commit puzzle inputs
 **/*.input.ts
+
+.DS_Store
